@@ -8,7 +8,7 @@ import { nanoid } from "nanoid";
 import * as Yup from "yup";
 
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsSlice.js";
+import { addContact } from "../../redux/contactsOps.js";
 
 const FeedbackSchema = Yup.object().shape({
     name: Yup.string()
@@ -21,11 +21,6 @@ const FeedbackSchema = Yup.object().shape({
         .max(50, "Too Long!")
         .required("Required"),
 });
-
-const initialValues = {
-  name: "",
-  number: ""
-};
 
 export const ContactForm = () => {
     const dispatch = useDispatch();
@@ -43,7 +38,7 @@ export const ContactForm = () => {
     };
     
     return (
-        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FeedbackSchema}>
+        <Formik initialValues={{text: ""}} onSubmit={handleSubmit} validationSchema={FeedbackSchema}>
             <Form>
                 <div className={css.form}>
                     <label className={css.label}  htmlFor={nameFieldId}><FaUser /> Name</label>

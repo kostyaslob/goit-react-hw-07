@@ -4,7 +4,7 @@ import { ContactForm } from "./ContactForm/ContactForm";
 import { SearchBox } from "./SearchBox/SearchBox";
 import { ContactList } from "./ContactList/ContactList";
 import { Loader } from "./Loader/Loader";
-import {ErrorMessage} from "./ErrorMessage/ErrorMessage"
+import { ErrorMessage } from "./ErrorMessage/ErrorMessage"
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchContacts } from "../redux/contactsOps";
@@ -16,6 +16,9 @@ export default function App() {
 
   useEffect(() => {
     dispatch(fetchContacts())
+      .unwrap()
+      .then(() => console.log("Success"))
+      .catch(() => console.log("Error"));
   }, [dispatch]);
 
   return (
