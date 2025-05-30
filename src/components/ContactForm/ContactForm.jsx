@@ -3,8 +3,6 @@ import { FaUser } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useId } from "react";
-import { nanoid } from "nanoid";
 import * as Yup from "yup";
 
 import { useDispatch } from "react-redux";
@@ -22,15 +20,16 @@ const FeedbackSchema = Yup.object().shape({
         .required("Required"),
 });
 
+const initialValues = {
+  name: "",
+  number: ""
+};
+
 export const ContactForm = () => {
     const dispatch = useDispatch();
 
-    const nameFieldId = useId();
-    const numberFieldId = useId();
-
     const handleSubmit = (values, actions) => {
         dispatch(addContact({
-            id: nanoid(),
             name: values.name,
             number: values.number,
         }));
@@ -38,14 +37,14 @@ export const ContactForm = () => {
     };
     
     return (
-        <Formik initialValues={{text: ""}} onSubmit={handleSubmit} validationSchema={FeedbackSchema}>
+        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FeedbackSchema}>
             <Form>
                 <div className={css.form}>
-                    <label className={css.label}  htmlFor={nameFieldId}><FaUser /> Name</label>
-                    <Field className={css.field} type="text" name="name" id={nameFieldId} />
+                    <label className={css.label} ><FaUser /> Name</label>
+                    <Field className={css.field} type="text" name="name"/>
                     <ErrorMessage className={css.error} name="name" component="span" />
-                    <label className={css.label} htmlFor={numberFieldId}><FaPhoneAlt /> Number</label>
-                    <Field className={css.field}type="tel" name="number" id={numberFieldId} />
+                    <label className={css.label} ><FaPhoneAlt /> Number</label>
+                    <Field className={css.field}type="tel" name="number" />
                     <ErrorMessage className={css.error} name="number" component="span" />
                     <button className={css.button} type="submit">Add contact</button>
                 </div>
