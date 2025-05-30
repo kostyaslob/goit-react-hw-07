@@ -40,11 +40,11 @@ export const ContactForm = () => {
         <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FeedbackSchema}>
             <Form>
                 <div className={css.form}>
-                    <label className={css.label} ><FaUser /> Name</label>
+                    <label className={css.label} ><FaUser/> Name</label>
                     <Field className={css.field} type="text" name="name"/>
                     <ErrorMessage className={css.error} name="name" component="span" />
-                    <label className={css.label} ><FaPhoneAlt /> Number</label>
-                    <Field className={css.field}type="tel" name="number" />
+                    <label className={css.label} ><FaPhoneAlt/> Number</label>
+                    <Field className={css.field} type="tel" name="number" />
                     <ErrorMessage className={css.error} name="number" component="span" />
                     <button className={css.button} type="submit">Add contact</button>
                 </div>
